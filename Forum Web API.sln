@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum Web API", "Forum Web API\Forum Web API.csproj", "{08D95287-188D-44E0-B92D-59C41DDEE6E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{F6703B44-66CB-4B3A-8551-11D21081EA1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{12151AA5-B49B-4A78-A4FD-F2C04345A573}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08D95287-188D-44E0-B92D-59C41DDEE6E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08D95287-188D-44E0-B92D-59C41DDEE6E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08D95287-188D-44E0-B92D-59C41DDEE6E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08D95287-188D-44E0-B92D-59C41DDEE6E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6703B44-66CB-4B3A-8551-11D21081EA1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6703B44-66CB-4B3A-8551-11D21081EA1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6703B44-66CB-4B3A-8551-11D21081EA1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6703B44-66CB-4B3A-8551-11D21081EA1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12151AA5-B49B-4A78-A4FD-F2C04345A573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12151AA5-B49B-4A78-A4FD-F2C04345A573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12151AA5-B49B-4A78-A4FD-F2C04345A573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12151AA5-B49B-4A78-A4FD-F2C04345A573}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

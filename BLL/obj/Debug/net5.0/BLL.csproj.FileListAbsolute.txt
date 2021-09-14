@@ -1,0 +1,60 @@
+D:\Forum\BLL\bin\Debug\net5.0\BLL.deps.json
+D:\Forum\BLL\bin\Debug\net5.0\BLL.dll
+D:\Forum\BLL\bin\Debug\net5.0\ref\BLL.dll
+D:\Forum\BLL\bin\Debug\net5.0\BLL.pdb
+D:\Forum\BLL\bin\Debug\net5.0\DAL.dll
+D:\Forum\BLL\bin\Debug\net5.0\DAL.pdb
+D:\Forum\BLL\obj\Debug\net5.0\BLL.csproj.AssemblyReference.cache
+D:\Forum\BLL\obj\Debug\net5.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Forum\BLL\obj\Debug\net5.0\BLL.AssemblyInfoInputs.cache
+D:\Forum\BLL\obj\Debug\net5.0\BLL.AssemblyInfo.cs
+D:\Forum\BLL\obj\Debug\net5.0\BLL.csproj.CoreCompileInputs.cache
+D:\Forum\BLL\obj\Debug\net5.0\BLL.csproj.CopyComplete
+D:\Forum\BLL\obj\Debug\net5.0\BLL.dll
+D:\Forum\BLL\obj\Debug\net5.0\ref\BLL.dll
+D:\Forum\BLL\obj\Debug\net5.0\BLL.pdb
+D:\Forum_Pet_Project\BLL\bin\Debug\net5.0\BLL.deps.json
+D:\Forum_Pet_Project\BLL\bin\Debug\net5.0\BLL.dll
+D:\Forum_Pet_Project\BLL\bin\Debug\net5.0\ref\BLL.dll
+D:\Forum_Pet_Project\BLL\bin\Debug\net5.0\BLL.pdb
+D:\Forum_Pet_Project\BLL\bin\Debug\net5.0\DAL.dll
+D:\Forum_Pet_Project\BLL\bin\Debug\net5.0\DAL.pdb
+D:\Forum_Pet_Project\BLL\obj\Debug\net5.0\BLL.csproj.AssemblyReference.cache
+D:\Forum_Pet_Project\BLL\obj\Debug\net5.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Forum_Pet_Project\BLL\obj\Debug\net5.0\BLL.AssemblyInfoInputs.cache
+D:\Forum_Pet_Project\BLL\obj\Debug\net5.0\BLL.AssemblyInfo.cs
+D:\Forum_Pet_Project\BLL\obj\Debug\net5.0\BLL.csproj.CoreCompileInputs.cache
+D:\Forum_Pet_Project\BLL\obj\Debug\net5.0\BLL.csproj.CopyComplete
+D:\Forum_Pet_Project\BLL\obj\Debug\net5.0\BLL.dll
+D:\Forum_Pet_Project\BLL\obj\Debug\net5.0\ref\BLL.dll
+D:\Forum_Pet_Project\BLL\obj\Debug\net5.0\BLL.pdb
+D:\FORUM v3\BLL\bin\Debug\net5.0\BLL.deps.json
+D:\FORUM v3\BLL\bin\Debug\net5.0\BLL.dll
+D:\FORUM v3\BLL\bin\Debug\net5.0\ref\BLL.dll
+D:\FORUM v3\BLL\bin\Debug\net5.0\BLL.pdb
+D:\FORUM v3\BLL\bin\Debug\net5.0\DAL.dll
+D:\FORUM v3\BLL\bin\Debug\net5.0\DAL.pdb
+D:\FORUM v3\BLL\obj\Debug\net5.0\BLL.csproj.AssemblyReference.cache
+D:\FORUM v3\BLL\obj\Debug\net5.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\FORUM v3\BLL\obj\Debug\net5.0\BLL.AssemblyInfoInputs.cache
+D:\FORUM v3\BLL\obj\Debug\net5.0\BLL.AssemblyInfo.cs
+D:\FORUM v3\BLL\obj\Debug\net5.0\BLL.csproj.CoreCompileInputs.cache
+D:\FORUM v3\BLL\obj\Debug\net5.0\BLL.csproj.CopyComplete
+D:\FORUM v3\BLL\obj\Debug\net5.0\BLL.dll
+D:\FORUM v3\BLL\obj\Debug\net5.0\ref\BLL.dll
+D:\FORUM v3\BLL\obj\Debug\net5.0\BLL.pdb
+D:\Forum Web API\BLL\bin\Debug\net5.0\BLL.deps.json
+D:\Forum Web API\BLL\bin\Debug\net5.0\BLL.dll
+D:\Forum Web API\BLL\bin\Debug\net5.0\ref\BLL.dll
+D:\Forum Web API\BLL\bin\Debug\net5.0\BLL.pdb
+D:\Forum Web API\BLL\bin\Debug\net5.0\DAL.dll
+D:\Forum Web API\BLL\bin\Debug\net5.0\DAL.pdb
+D:\Forum Web API\BLL\obj\Debug\net5.0\BLL.csproj.AssemblyReference.cache
+D:\Forum Web API\BLL\obj\Debug\net5.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Forum Web API\BLL\obj\Debug\net5.0\BLL.AssemblyInfoInputs.cache
+D:\Forum Web API\BLL\obj\Debug\net5.0\BLL.AssemblyInfo.cs
+D:\Forum Web API\BLL\obj\Debug\net5.0\BLL.csproj.CoreCompileInputs.cache
+D:\Forum Web API\BLL\obj\Debug\net5.0\BLL.csproj.CopyComplete
+D:\Forum Web API\BLL\obj\Debug\net5.0\BLL.dll
+D:\Forum Web API\BLL\obj\Debug\net5.0\ref\BLL.dll
+D:\Forum Web API\BLL\obj\Debug\net5.0\BLL.pdb
