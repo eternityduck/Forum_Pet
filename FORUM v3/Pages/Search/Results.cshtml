@@ -1,0 +1,83 @@
+﻿@model Forum.ViewModels.SearchViewModel.SearchResultViewModel
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading">
+            <span id="results">Results for: @Model.SearchQuery</span>
+            <form asp-controller="Search" asp-action="Search" method="post">
+                <div class="searchForm">
+                    <input asp-for="SearchQuery" type="text" placeholder="Search..." class="searchBar" onfocus="clearThis(this)">
+                    <button type="submit" class="btn buttonSearch">
+                        <i class="material-icons">search</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row" id="forumIndexContent">
+        @if (Model.Posts.Any())
+        {
+            <table class="table table-hover table-bordered" id="forumIndexTable">
+                <tbody>
+                    @foreach (var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+                                <div class="postData">
+                                    <div class="postTitle">
+                                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">@post.Title</a>
+                                    </div>
+                                    <div class="forumSubTitle">
+                                        <div>
+                                                by:
+                                            <span class="postAuthor">
+                                                <a asp-controller="Account" asp-action="Details" asp-route-id="@post.AuthorId">
+                                                    @post.Author
+                                                </a>
+                                              
+                                            </span>
+                                                in:
+                                            <span class="postForum">
+                                                <a asp-controller="Topic" asp-action="Topic" asp-route-id="@post.Topic.Id">@post.Topic.Name</a>
+                                            </span>
+                                                on:
+                                            <span class="postDate">
+                                                @post.DatePosted
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="forumPostCount">
+                                    Replies: @post.RepliesCount
+                                </div>
+                            </td>
+                            <td>
+                                <div class="postDate">@post.DatePosted</div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else if (@Model.EmptySearchResults)
+        {
+            <div class="noPosts">
+                <i class="material-icons md-72">question_answer</i>
+                <h3>
+                    No search results found for @Model.SearchQuery <br />
+                </h3>
+            </div>
+
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function clearThis(target) {
+            target.value = "";
+        }
+    </script>
+}

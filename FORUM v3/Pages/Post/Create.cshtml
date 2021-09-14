@@ -1,0 +1,46 @@
+﻿@model Forum.ViewModels.PostViewModel.CreatePostViewModel
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading noBorder">
+            New Post | @Model.TopicName
+            @* <div class="forumLogo" style="background-image: url(@Model.ForumImageUrl); background-size:100%"></div> *@
+            <span id="headingBtn"><a asp-controller="Topic" asp-action="Topic" asp-route-id="@Model.TopicId" class="btn btn-back">Back to @Model.TopicName</a></span>
+        </div>
+    </div>
+    @if (!Context.User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <div id="forumIndexContent">
+                <div class="register">You must be a <a asp-controller="Account" asp-action="Register">registered member</a> to create a new post.</div>
+            </div>
+        </div>
+    }
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <div class="createPostSection">
+                <div class="authorBlock">
+                    You're submitting this post as <span class="authorBlockName">@Model.AuthorName</span>
+                </div>
+                <form asp-action="AddPost" method="post" id="addPostForm">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Content">Post Content</label>
+                        <textarea asp-for="Content" rows="20" class="form-control" placeholder="Write your post here."></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                    <button type="submit" id="registerBtn" class="btn btn-submitPost">Submit Post</button>
+                    <input asp-for="UserId" type="hidden" />
+                    <input asp-for="TopicName" type="hidden" />
+                    <input asp-for="TopicId" type="hidden" />
+                </form>
+            </div>
+        </div>
+    }
+</div>

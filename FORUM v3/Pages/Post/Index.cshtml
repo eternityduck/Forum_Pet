@@ -1,0 +1,64 @@
+﻿@model Forum.ViewModels.PostViewModel.PostIndexPostViewModel
+
+<div class="container body-content">
+    <div class="row postHeader">
+        <div class="postHeading">
+            <span class="postIndexTitle">
+                @Model.Title
+            </span>
+            <span id="headingBtn"><a asp-controller="Topic" asp-action="Topic" asp-route-id="@Model.TopicId" class="btn btn-back">Back to @Model.TopicName</a></span>
+        </div>
+    </div>
+
+    <div class="row" id="postIndexContent">
+        <div class="col-md-3 postAuthorContainer">
+            @* <div class="postAuthorImage" style="background-image: url(@Model.AuthorImageUrl); background-size: 100%;"></div> *@
+            <a asp-controller="Account" asp-action="Details" asp-route-id="@Model.AuthorId">
+            <strong>@Model.AuthorName</strong>
+            </a>
+            <span class="postDate">@Model.CreatedAt</span>
+            
+        </div>
+        <div class="col-md-9 postContentContainer">
+            <div class="postContent">
+                @Html.Raw(@Model.Text)
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id ="replyDivider"></div>
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <div class="row" id="replyRow">
+            <span><a asp-controller="Comment" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">Comment</a></span>
+        </div>
+    }
+    @if (Model.Comments.Any())
+    {
+        foreach (var comment in Model.Comments)
+                {
+            <div class="row replyContent">
+                <div class="col-md-3 replyAuthorContainer">
+                    @* <div class="postAuthorImage" style="background-image: url(@comment.AuthorImageUrl); background-size: 100%;"></div> *@
+                    <a asp-controller="Account" asp-action="Details" asp-route-id="@comment.AuthorId">
+                    <strong>@comment.AuthorName</strong>
+                    </a>
+                    <span class="postDate">@comment.CreatedAt</span>
+                </div>
+                <div class="col-md-9 replyContentContainer">
+                    <div class="postContent">
+                        @Html.Raw(comment.Content)
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="noPosts">
+            <h3>
+                There are no replies to this post.<br />
+            </h3>
+        </div>
+    }
+</div>

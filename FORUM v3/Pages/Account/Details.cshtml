@@ -1,0 +1,34 @@
+﻿
+@model Forum.ViewModels.UserViewModel.Profile
+
+
+<div class="container body-content">
+    <div class="row sectionHeader">
+        <div class="sectionHeading noBorder">
+            User Profile
+        </div>
+        @if (User.IsInRole("Admin"))
+        {
+            <form method="post" asp-controller="Users" asp-action="Delete" asp-route-id="@Model.UserId">
+                <div>
+                    <button class="btn btn-danger">Deactivate User</button>
+                </div>
+            </form>
+        }
+    </div>
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <div class="row userProfile">
+            <div class="col-md-4">
+                @* <div id="userProfileImage" style="background-image: url(@Model.ProfileImageUrl); background-size:100%;"></div> *@
+                
+            </div>
+            <div class="col-md-8">
+                <span id="userNameLabel">Name: @Model.Name</span><br/>
+                <span id="userEmailLabel">Email: @Model.Email</span><br/>
+                <span id="userCreatedLabel">Member Since: @Model.AccountCreatedAt</span>
+                
+            </div>
+        </div>
+    }
+</div>

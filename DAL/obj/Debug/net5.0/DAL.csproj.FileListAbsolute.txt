@@ -1,0 +1,45 @@
+D:\Forum\DAL\bin\Debug\net5.0\DAL.deps.json
+D:\Forum\DAL\bin\Debug\net5.0\DAL.dll
+D:\Forum\DAL\bin\Debug\net5.0\ref\DAL.dll
+D:\Forum\DAL\bin\Debug\net5.0\DAL.pdb
+D:\Forum\DAL\obj\Debug\net5.0\DAL.csproj.AssemblyReference.cache
+D:\Forum\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Forum\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+D:\Forum\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+D:\Forum\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+D:\Forum\DAL\obj\Debug\net5.0\DAL.dll
+D:\Forum\DAL\obj\Debug\net5.0\ref\DAL.dll
+D:\Forum\DAL\obj\Debug\net5.0\DAL.pdb
+D:\Forum\DAL\bin\Debug\net5.0\DAL.runtimeconfig.json
+D:\Forum\DAL\bin\Debug\net5.0\DAL.runtimeconfig.dev.json
+D:\Forum\DAL\obj\Debug\net5.0\DAL.genruntimeconfig.cache
+D:\Forum_Pet_Project\DAL\bin\Debug\net5.0\DAL.deps.json
+D:\Forum_Pet_Project\DAL\bin\Debug\net5.0\DAL.runtimeconfig.json
+D:\Forum_Pet_Project\DAL\bin\Debug\net5.0\DAL.runtimeconfig.dev.json
+D:\Forum_Pet_Project\DAL\bin\Debug\net5.0\DAL.dll
+D:\Forum_Pet_Project\DAL\bin\Debug\net5.0\ref\DAL.dll
+D:\Forum_Pet_Project\DAL\bin\Debug\net5.0\DAL.pdb
+D:\Forum_Pet_Project\DAL\obj\Debug\net5.0\DAL.csproj.AssemblyReference.cache
+D:\Forum_Pet_Project\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Forum_Pet_Project\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+D:\Forum_Pet_Project\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+D:\Forum_Pet_Project\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+D:\Forum_Pet_Project\DAL\obj\Debug\net5.0\DAL.dll
+D:\Forum_Pet_Project\DAL\obj\Debug\net5.0\ref\DAL.dll
+D:\Forum_Pet_Project\DAL\obj\Debug\net5.0\DAL.pdb
+D:\Forum_Pet_Project\DAL\obj\Debug\net5.0\DAL.genruntimeconfig.cache
+D:\FORUM v3\DAL\bin\Debug\net5.0\DAL.deps.json
+D:\FORUM v3\DAL\bin\Debug\net5.0\DAL.runtimeconfig.json
+D:\FORUM v3\DAL\bin\Debug\net5.0\DAL.runtimeconfig.dev.json
+D:\FORUM v3\DAL\bin\Debug\net5.0\DAL.dll
+D:\FORUM v3\DAL\bin\Debug\net5.0\ref\DAL.dll
+D:\FORUM v3\DAL\bin\Debug\net5.0\DAL.pdb
+D:\FORUM v3\DAL\obj\Debug\net5.0\DAL.csproj.AssemblyReference.cache
+D:\FORUM v3\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\FORUM v3\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+D:\FORUM v3\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+D:\FORUM v3\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+D:\FORUM v3\DAL\obj\Debug\net5.0\DAL.dll
+D:\FORUM v3\DAL\obj\Debug\net5.0\ref\DAL.dll
+D:\FORUM v3\DAL\obj\Debug\net5.0\DAL.pdb
+D:\FORUM v3\DAL\obj\Debug\net5.0\DAL.genruntimeconfig.cache

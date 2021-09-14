@@ -1,0 +1,60 @@
+﻿@model Forum.ViewModels.Home.HomeIndexViewModel
+
+<div class="container body-content">
+    <div class="row frontPageSplash">
+        <div class="col-md-6 frontPageLearn">
+            <div class="frontPageHeading">Learn, Collaborate, Share Knowledge</div>
+            <p class="frontPageSubHeading">Lambda Forums is the world's fastest growing coding forum.</p>
+            <div>
+                <form asp-controller="Search" asp-action="Search" method="post">
+                    <input asp-for="SearchQuery" type="text" class="homeSearch" placeholder="Search..."/>
+                    <button type="submit" class="btn buttonSearch">
+                        <i class="material-icons">search</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row frontPageContent">
+        <h3 id="latestPosts">Latest Posts</h3>
+        <table class="table table-hover" id="latestPostsTable">
+            <tbody>
+            @foreach (var post in Model.LatestPosts)
+            {
+                <tr>
+                    <td>
+
+                        <div class="postTitle">
+                            <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
+                                @post.Title
+                            </a>
+                        </div>
+                        <div class="postSubTitle">
+                            @if (@post.RepliesCount == 1)
+                            {
+                                <span>@post.RepliesCount Reply</span>
+                            }
+                            @if (@post.RepliesCount == 0)
+                            {
+                                <span>No Replies</span>
+                            }
+                            else
+                            {
+                                <span>@post.RepliesCount Replies</span>
+                            }
+                            |
+                            <span class="postUser">
+                                <a asp-controller="Account" asp-action="Details" asp-route-id="@post.AuthorId">@post.Author</a>
+                                <a asp-controller="Topic" asp-action="Topic" asp-route-id="@post.TopicId"></a>@post.TopicName
+                            </span> on <span class="postDate">@post.DatePosted</span>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
