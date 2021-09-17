@@ -52,32 +52,32 @@ namespace Forum.Controllers
                 Author = user
             };
         }
-        // [HttpGet("/Comment/Create/{id}")]
-        // [Authorize]
-        // public async Task<CommentIndexViewModel> Create(int id)
-        // {
-        //     var post = _postService.GetById(id);
-        //     var topic = await _topicService.GetByIdAsync(post.Topic.Id);
-        //     var user = await _userManager.FindByNameAsync(User.Identity.Name);
-        //          
-        //     var model = new CommentIndexViewModel()
-        //     {
-        //         PostContent = post.Text,
-        //         PostTitle = post.Title,
-        //         PostId = post.Id,
-        //
-        //         TopicName = topic.Title,
-        //         TopicId = topic.Id,
-        //
-        //         AuthorName = User.Identity.Name,
-        //        
-        //         AuthorId = user.Id,
-        //         
-        //         CreatedAt = DateTime.Now
-        //     };
-        //
-        //     return model;
-        // }
+        [HttpGet("/Comment/Create/{id}")]
+        [Authorize]
+        public async Task<CommentIndexViewModel> Create(int id)
+        {
+            var post = _postService.GetById(id);
+            var topic = await _topicService.GetByIdAsync(post.Topic.Id);
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                 
+            var model = new CommentIndexViewModel()
+            {
+                PostContent = post.Text,
+                PostTitle = post.Title,
+                PostId = post.Id,
+        
+                TopicName = topic.Title,
+                TopicId = topic.Id,
+        
+                AuthorName = User.Identity.Name,
+               
+                AuthorId = user.Id,
+                
+                CreatedAt = DateTime.Now
+            };
+        
+            return model;
+        }
         [HttpDelete("Comment/Delete/{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Comment>> Delete(int id)

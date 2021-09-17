@@ -169,6 +169,7 @@ namespace BLL.Services
 
         public async Task UpdateAsync(Post model)
         {
+            _context.Entry(model).State = EntityState.Modified;
             _context.Posts.Update(model);
             await _context.SaveChangesAsync();
         }

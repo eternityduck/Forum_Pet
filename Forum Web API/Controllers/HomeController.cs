@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Forum.Controllers
 {
+    //TODO fix
     [ApiController]
     [Route("[controller]")]
     public class HomeController : ControllerBase

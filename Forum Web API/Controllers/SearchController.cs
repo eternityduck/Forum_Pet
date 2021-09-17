@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using BLL.Interfaces;
 using DAL.Models;
 using Forum.ViewModels.PostViewModel;
@@ -25,13 +26,13 @@ namespace Forum.Controllers
         {
             var posts = _postService.GetFilteredPosts(searchQuery).ToList();
             var noResults = !string.IsNullOrEmpty(searchQuery) && !posts.Any();
-            var postList = posts.Select(x => new PostListViewModel()
+            var postList = posts.Select(x => new PostListViewModel
             {
                 Id = x.Id,
                 AuthorId = x.Author.Id,
                 Author = x.Author.Name,
                 Title = x.Title,
-                DatePosted = x.CreatedAt.ToString(),
+                DatePosted = x.CreatedAt.ToString(CultureInfo.CurrentCulture),
                 RepliesCount = x.Comments.Count,
                 Topic = BuildTopicList(x)
             });
@@ -54,10 +55,10 @@ namespace Forum.Controllers
             };
             return topicList;
         }
-        [HttpPost]
-        public ActionResult Search([FromForm] string searchQuery)
-        {
-            return RedirectToAction("Results", new {searchQuery});
-        }
+        // [HttpPost]
+        // public ActionResult Search([FromForm] string searchQuery)
+        // {
+        //     return RedirectToAction("Results", new {searchQuery});
+        // }
     }
 }

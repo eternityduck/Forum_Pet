@@ -7,7 +7,6 @@ namespace Forum.ViewModels.PostViewModel
         public int Id { get; set; }
         public string Title { get; set; }
         public string TopicName { get; set; }
-        public string TopicImageUrl { get; set; }
         public int TopicId { get; set; }
         public string Content { get; set; }
         public DateTime Created { get; set; }

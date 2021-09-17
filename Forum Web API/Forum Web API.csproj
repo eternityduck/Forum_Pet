@@ -21,4 +21,9 @@
       <ProjectReference Include="..\DAL\DAL.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\_ViewImports.cshtml" />
+    </ItemGroup>
+
 </Project>

@@ -28,7 +28,7 @@ namespace Forum.Controllers
                 Id = topic.Id,
                 Name = topic.Title,
                 Description = topic.Description,
-                NumberOfPosts = topic.Posts?.Count() ?? 0,
+                NumberOfPosts = topic.Posts?.Count ?? 0,
                 NumberOfUsers = _topicService.GetUsers(topic.Id).Count(),
             });
 
@@ -37,7 +37,7 @@ namespace Forum.Controllers
             var model = new TopicIndexViewModel()
             {
                 TopicList = forumListingModels.OrderBy(forum=>forum.Name),
-                NumberOfTopics = forumListingModels.Count()
+                NumberOfTopics = forumListingModels.Count
             };
 
             return model;
@@ -54,7 +54,7 @@ namespace Forum.Controllers
         {
             var topic = await _topicService.GetByIdAsync(id);
             var posts = _topicService.GetFilteredPosts(id, searchQuery).ToList();
-            var noResults = (!string.IsNullOrEmpty(searchQuery) && !posts.Any());
+            var noResults = !string.IsNullOrEmpty(searchQuery) && !posts.Any();
 
             var postListings = posts.Select(post => new PostListViewModel()
             {
@@ -64,7 +64,7 @@ namespace Forum.Controllers
                 AuthorId = post.Author.Id,
                 Title = post.Title,
                 DatePosted = post.CreatedAt.ToString(CultureInfo.InvariantCulture),
-                RepliesCount = post.Comments.Count()
+                RepliesCount = post.Comments.Count
             }).OrderByDescending(post=>post.DatePosted);
 
             var model = new TopicResultViewModel()

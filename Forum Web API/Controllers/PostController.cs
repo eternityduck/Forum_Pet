@@ -25,7 +25,8 @@ namespace Forum.Controllers
             _topicService = topicService;
             (_service, _userManager) = (service, userManager);
         }
-
+        
+        //work
         [HttpGet]
         public async Task<PostIndexPostViewModel> Index(int id)
         {
@@ -60,42 +61,25 @@ namespace Forum.Controllers
         }
 
         
-        // [HttpPost, ActionName("Delete")]
-        // [ValidateAntiForgeryToken]
-        // public async Task<IActionResult> DeleteConfirmed(int id)
-        // {
-        //     await _service.DeleteByIdAsync(id);
-        //     return RedirectToAction(nameof(Index));
-        // }
-        // public async Task<Post> Edit(int id)
-        // {
-        //     return await _service.GetByIdAsync(id);
-        // }
+        
+        //work
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _service.DeleteByIdAsync(id);
+            return NoContent();
+        }
         
         
-        [HttpPost("/Post/Edit/{id}")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id, Title, Text, Author, CreatedAt")] Post post)
+        
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Edit(int id, Post post)
         {
             await _service.UpdateAsync(post);
-            return RedirectToAction(nameof(Index));
+            return NoContent();
         }
-        // [HttpGet]
-        // public async Task<CreatePostViewModel> Create(int id)
-        // {
-        //    
-        //     var forum = await _topicService.GetByIdAsync(id);
-        //
-        //     var model = new CreatePostViewModel()
-        //     {
-        //         TopicName = forum.Title,
-        //         TopicId = forum.Id,
-        //         AuthorName = User.Identity.Name,
-        //         
-        //     };
-        //
-        //     return model;
-        // }
-
+        
+        //works
         [HttpPost]
         public async Task<IActionResult> AddPost(CreatePostViewModel model)
         {
@@ -104,7 +88,7 @@ namespace Forum.Controllers
             var post = BuildPost(model, user);
 
             await _service.AddAsync(post);
-            return RedirectToAction("Index", "Topic", model.TopicId);
+            return CreatedAtAction(nameof(Index), new { id = model.Id }, model);
         }
        
         private Post BuildPost(CreatePostViewModel post, User user)

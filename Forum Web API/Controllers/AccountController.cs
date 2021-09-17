@@ -92,7 +92,7 @@ namespace Forum.Controllers
         public async Task<ActionResult<Profile>> Details(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
-            var model = new Profile()
+            var model = new Profile
             {
                 UserId = user.Id,
                 UserName = user.UserName,

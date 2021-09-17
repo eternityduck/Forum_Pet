@@ -80,33 +80,8 @@ D:\Forum Web API\Forum Web API\obj\Debug\net5.0\scopedcss\bundle\Forum Web API.s
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.TagHelpers.input.cache
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.TagHelpers.output.cache
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.RazorCoreGenerate.cache
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Account\Details.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Comment\Create.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Comment\Delete.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Comment\Edit.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Post\Create.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Post\Edit.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Post\Index.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Roles\Create.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Roles\Edit.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Roles\Index.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Roles\UserList.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Search\Results.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Topic\Index.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Topic\Topic.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Users\ChangePassword.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Users\Create.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Users\Edit.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Users\Index.cshtml.g.cs
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.RazorTargetAssemblyInfo.cache
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.RazorTargetAssemblyInfo.cs
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.Views.pdb
