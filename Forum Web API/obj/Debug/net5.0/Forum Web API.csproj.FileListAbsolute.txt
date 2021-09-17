@@ -8,7 +8,6 @@ D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Forum Web API.dll
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\ref\Forum Web API.dll
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Forum Web API.pdb
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Forum Web API.Views.dll
-D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Forum Web API.Views.pdb
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\AutoMapper.dll
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\EntityFramework.SqlServer.dll
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\EntityFramework.dll
@@ -72,21 +71,17 @@ D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.AssemblyInfo.cs
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.csproj.CoreCompileInputs.cache
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.MvcApplicationPartsAssemblyInfo.cs
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.MvcApplicationPartsAssemblyInfo.cache
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.RazorAssemblyInfo.cache
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.RazorAssemblyInfo.cs
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\staticwebassets\Forum Web API.StaticWebAssets.Manifest.cache
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\staticwebassets\Forum Web API.StaticWebAssets.xml
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\scopedcss\bundle\Forum Web API.styles.css
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.TagHelpers.input.cache
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.TagHelpers.output.cache
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.RazorCoreGenerate.cache
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.RazorTargetAssemblyInfo.cache
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.RazorTargetAssemblyInfo.cs
-D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.Views.pdb
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.csproj.CopyComplete
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.dll
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\ref\Forum Web API.dll
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.pdb
 D:\Forum Web API\Forum Web API\obj\Debug\net5.0\Forum Web API.genruntimeconfig.cache
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\IdentityModel.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\IdentityModel.AspNetCore.OAuth2Introspection.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\IdentityServer4.AccessTokenValidation.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Annotations.dll

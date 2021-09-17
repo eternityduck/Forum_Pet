@@ -67,11 +67,11 @@ namespace Forum.Controllers
             return topicList;
         }
 
-        [HttpPost]
-        public IActionResult Search(string searchQuery)
-        {
-            return RedirectToAction("Topic", "Topic", new { searchQuery });
-        }
+        // [HttpGet("/Search")]
+        // public IActionResult Search(string searchQuery)
+        // {
+        //     return RedirectToAction("Topic", "Topic", new { searchQuery });
+        // }
 
         // public IActionResult Privacy()
         // {

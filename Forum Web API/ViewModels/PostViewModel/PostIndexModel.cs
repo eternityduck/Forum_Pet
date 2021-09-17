@@ -11,7 +11,6 @@ namespace Forum.ViewModels.PostViewModel
         public string Text { get; set; }
         public string AuthorId { get; set; }
         public string AuthorName { get; set; }
-        public string AuthorImageUrl { get; set; }
         public DateTime CreatedAt{ get; set; }
         public int TopicId { get; set; }
         public string TopicName { get; set; }

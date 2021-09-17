@@ -21,10 +21,8 @@ namespace Forum.Controllers
             _userManager = userManager;
         }
         [HttpGet]
-        public List<User> Index() => _userManager.Users.ToList();
+        public ActionResult<List<User>> Index() => _userManager.Users.ToList();
         
-        // [HttpGet("/Create")]
-        // public IActionResult Create() => Ok();
 
         [HttpPost("/Add")]
         public async Task<ActionResult<CreateUserViewModel>> Create(CreateUserViewModel model)

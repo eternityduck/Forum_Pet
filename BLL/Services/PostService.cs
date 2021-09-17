@@ -16,9 +16,8 @@ namespace BLL.Services
         private readonly ForumContext _context;
         private readonly Mapper _mapper;
 
-        public PostService(Mapper mapper, ForumContext context)
+        public PostService( ForumContext context)
         {
-            _mapper = mapper;
             _context = context;
         }
 

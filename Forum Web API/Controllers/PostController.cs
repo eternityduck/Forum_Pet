@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Forum.Controllers
 {
+    //works
     [ApiController]
     [Route("[controller]")]
     public class PostController : ControllerBase
@@ -26,7 +27,6 @@ namespace Forum.Controllers
             (_service, _userManager) = (service, userManager);
         }
         
-        //work
         [HttpGet]
         public async Task<PostIndexPostViewModel> Index(int id)
         {
@@ -46,7 +46,6 @@ namespace Forum.Controllers
             };
             return model;
         }
-        [HttpGet]
         private IEnumerable<CommentIndexViewModel> GetComments(Post post)
         {
             return post.Comments.Select(c => new CommentIndexViewModel()
@@ -62,8 +61,9 @@ namespace Forum.Controllers
 
         
         
-        //work
+        
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             await _service.DeleteByIdAsync(id);
@@ -73,14 +73,16 @@ namespace Forum.Controllers
         
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, Post post)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, string content)
         {
-            await _service.UpdateAsync(post);
-            return NoContent();
+            await _service.EditPostContent(id, content);
+            return Ok();
         }
         
-        //works
+       
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddPost(CreatePostViewModel model)
         {
             var userId = _userManager.GetUserId(User);

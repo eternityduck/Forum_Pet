@@ -28,11 +28,6 @@ namespace BLL.Services
                 .Include(x => x.Post).ThenInclude(x => x.Author).FirstOrDefaultAsync(x => x.Id == id);
         }
         
-        public async Task UpdateAsync(Comment model)
-        {
-            _context.Comments.Update(model);
-            await _context.SaveChangesAsync();
-        }
 
         public async Task DeleteByIdAsync(int modelId)
         {
@@ -40,10 +35,9 @@ namespace BLL.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task Edit(int id, string message)
+        public async Task UpdateAsync(int id, string message)
         {
             var comment = await GetByIdAsync(id);
-            await _context.SaveChangesAsync();
             comment.Text = message;
             _context.Update(comment);
             await _context.SaveChangesAsync();

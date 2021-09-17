@@ -20,12 +20,7 @@ namespace Forum.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
-        [HttpGet("/Register")]
-        public ActionResult Register()
-        {
-            return Ok();
-        }
+        
 
         [HttpPost("/Register")]
         public async Task<ActionResult<RegisterViewModel>> Register(RegisterViewModel model)
@@ -49,15 +44,10 @@ namespace Forum.Controllers
 
             return model;
         }
-
-        [HttpGet("/Login")]
-        public ActionResult<LoginViewModel> Login(string returnUrl = null)
-        {
-            return new LoginViewModel {ReturnUrl = returnUrl};
-        }
+        
 
         [HttpPost("/Login")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult<LoginViewModel>> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -80,13 +70,15 @@ namespace Forum.Controllers
             return model;
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost("/Logout")]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+        
+        //TODO fix
         [HttpGet("/Details")]
         [Authorize]
         public async Task<ActionResult<Profile>> Details(string id)

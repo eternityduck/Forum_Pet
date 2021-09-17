@@ -42,15 +42,16 @@ namespace Forum.Controllers
 
             return model;
         }
-        [HttpPost]
-        [Route("~/Topic/Search/{id}/{searchQuery?}")]
-        public IActionResult Search(int id, string searchQuery)
-        {
-            return RedirectToAction("Topic", new {id, searchQuery});
-        }
-        [Route("~/Topic/{id}/{searchQuery?}")]
+        // [HttpPost]
+        // [Route("~/Topic/Search/{id}/{searchQuery?}")]
+        // public IActionResult Search(int id, string searchQuery)
+        // {
+        //     return RedirectToAction("Topic", new {id, searchQuery});
+        // }
+        //TODO fix
+        [Route("~/Topic/{id?}/{searchQuery?}")]
         [HttpGet]
-        public async Task<TopicResultViewModel> Topic(int id, string searchQuery)
+        public async Task<TopicResultViewModel> Topic( int id, string searchQuery)
         {
             var topic = await _topicService.GetByIdAsync(id);
             var posts = _topicService.GetFilteredPosts(id, searchQuery).ToList();

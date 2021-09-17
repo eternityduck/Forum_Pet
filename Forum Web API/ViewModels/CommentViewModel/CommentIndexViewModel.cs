@@ -8,7 +8,6 @@ namespace Forum.ViewModels.CommentViewModel
 
         public string AuthorId { get; set; }
         public string AuthorName { get; set; }
-        public string AuthorImageUrl { get; set; }
         //public bool IsAuthorAdmin { get; set; }
 
         public DateTime CreatedAt { get; set; }
@@ -19,7 +18,6 @@ namespace Forum.ViewModels.CommentViewModel
         public string PostContent { get; set; }
 
         public string TopicName { get; set; }
-        //public string ForumImageUrl { get; set; }
         public int TopicId { get; set; }
     }
 }

@@ -18,29 +18,31 @@ namespace Forum.Controllers
         private readonly IPostService _postService;
         private readonly ITopicService _topicService;
         private readonly UserManager<User> _userManager;
-        public CommentController(ICommentService service, UserManager<User> userManager, IPostService postService, ITopicService topicService)
+
+        public CommentController(ICommentService service, UserManager<User> userManager, IPostService postService,
+            ITopicService topicService)
         {
             _postService = postService;
             _topicService = topicService;
             (_commentService, _userManager) = (service, userManager);
         }
-        
-        
+
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [Route("~/Comment")]
+        [Authorize]
         public async Task<IActionResult> AddComment(CommentIndexViewModel commentIndexModel)
         {
-            
             var userId = _userManager.GetUserId(User);
             var user = await _userManager.FindByIdAsync(userId);
             var comment = CommentCreate(commentIndexModel, user);
-        
+
             await _postService.AddCommentAsync(comment);
-            
-            return RedirectToAction("Index", "Post", new { id = commentIndexModel.PostId });
+
+            return RedirectToAction("Index", "Post", new {id = commentIndexModel.PostId});
         }
-        
+
         private Comment CommentCreate(CommentIndexViewModel model, User user)
         {
             var post = _postService.GetById(model.PostId);
@@ -52,67 +54,70 @@ namespace Forum.Controllers
                 Author = user
             };
         }
-        [HttpGet("/Comment/Create/{id}")]
-        [Authorize]
-        public async Task<CommentIndexViewModel> Create(int id)
-        {
-            var post = _postService.GetById(id);
-            var topic = await _topicService.GetByIdAsync(post.Topic.Id);
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                 
-            var model = new CommentIndexViewModel()
-            {
-                PostContent = post.Text,
-                PostTitle = post.Title,
-                PostId = post.Id,
-        
-                TopicName = topic.Title,
-                TopicId = topic.Id,
-        
-                AuthorName = User.Identity.Name,
-               
-                AuthorId = user.Id,
-                
-                CreatedAt = DateTime.Now
-            };
-        
-            return model;
-        }
-        [HttpDelete("Comment/Delete/{id}")]
+
+        // [HttpGet("/Comment/Create/{id}")]
+        // [Authorize]
+        // public async Task<CommentIndexViewModel> Create(int id)
+        // {
+        //     var post = _postService.GetById(id);
+        //     var topic = await _topicService.GetByIdAsync(post.Topic.Id);
+        //     var user = await _userManager.FindByNameAsync(User.Identity.Name);
+        //          
+        //     var model = new CommentIndexViewModel()
+        //     {
+        //         PostContent = post.Text,
+        //         PostTitle = post.Title,
+        //         PostId = post.Id,
+        //
+        //         TopicName = topic.Title,
+        //         TopicId = topic.Id,
+        //
+        //         AuthorName = User.Identity.Name,
+        //        
+        //         AuthorId = user.Id,
+        //         
+        //         CreatedAt = DateTime.Now
+        //     };
+        //
+        //     return model;
+        // }
+        [HttpDelete("/Delete/{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<Comment>> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             var post = await _commentService.GetByIdAsync(id);
+
             if (post == null)
             {
                 return NotFound();
             }
 
-            return post;
-        }
-        
-       
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        [Route("Comment/Delete/{id}")]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
             await _commentService.DeleteByIdAsync(id);
             return Ok();
         }
-        // public async Task<ActionResult<Comment>> Edit(int id)
+
+
+        // [HttpPost, ActionName("Delete")]
+        // [ValidateAntiForgeryToken]
+        // [Authorize(Roles = "Admin")]
+        // [Route("Comment/Delete/{id}")]
+        // public async Task<ActionResult> DeleteConfirmed(int id)
         // {
-        //     return await _commentService.GetByIdAsync(id);
+        //     await _commentService.DeleteByIdAsync(id);
+        //     return Ok();
         // }
-        
+
         [HttpPut]
-        [Route("Comment/Edit/{id}")]
-        public async Task<ActionResult<Comment>> Edit([Bind("Id, Title, Text, Author, CreatedAt")] Comment comment)
+        [Route("/Edit/{id}")]
+        [Authorize]
+        public async Task<ActionResult<Comment>> EditAsync(int id, string message)
         {
-            await _commentService.UpdateAsync(comment);
-            return comment;
+            var userId = _userManager.GetUserId(User);
+            var user = await _userManager.FindByIdAsync(userId);
+            var comment = await _commentService.GetByIdAsync(id);
+            if (comment != null || user.Id != comment.Author.Id) return BadRequest();
+            await _commentService.UpdateAsync(id, message);
+            return Ok();
         }
-       
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DAL.Models;
 using Forum.ViewModels.UserViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace Forum.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Roles = "Admin")]
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> _roleManager;
@@ -21,8 +23,7 @@ namespace Forum.Controllers
         }
         [HttpGet]
         public List<IdentityRole> Index() => _roleManager.Roles.ToList();
- 
-        //public ActionResult Create() => View();
+        
         [HttpPost]
         public async Task<ActionResult<string>> Create(string name)
         {
@@ -33,13 +34,12 @@ namespace Forum.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                else
-                {
+                
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
-                }
+                
             }
             return name;
         }
@@ -79,7 +79,7 @@ namespace Forum.Controllers
  
             return NotFound();
         }
-        [HttpPut("/User/{userId}/{roles?}")]
+        [HttpPut("/User/{userId}/{roles}")]
         public async Task<IActionResult> Edit(string userId, List<string> roles)
         {
          

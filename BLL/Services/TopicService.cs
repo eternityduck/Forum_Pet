@@ -13,11 +13,9 @@ namespace BLL.Services
     public class TopicService : ITopicService
     {
         private readonly ForumContext _context;
-        private readonly Mapper _mapper;
         private readonly IPostService _postService;
-        public TopicService(Mapper mapper, ForumContext context, IPostService postService)
+        public TopicService(ForumContext context, IPostService postService)
         {
-            _mapper = mapper;
             _context = context;
             _postService = postService;
         }
@@ -85,7 +83,7 @@ namespace BLL.Services
                 .ThenInclude(p=>p.Topic)
                 .FirstOrDefault();
 
-            if(topic.Posts == null)
+            if(topic is {Posts: null})
             {
                 topic.Posts = new List<Post>();
             }
