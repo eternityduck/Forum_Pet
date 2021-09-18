@@ -85,3 +85,6 @@ D:\Forum Web API\Forum Web API\bin\Debug\net5.0\IdentityModel.AspNetCore.OAuth2I
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\IdentityServer4.AccessTokenValidation.dll
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Annotations.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\IdentityServer4.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\IdentityServer4.Storage.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll

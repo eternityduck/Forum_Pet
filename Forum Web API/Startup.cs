@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using BLL;
 using BLL.Interfaces;
@@ -10,18 +6,12 @@ using DAL;
 using DAL.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using OpenApiInfo = Microsoft.OpenApi.Models.OpenApiInfo;
-using OpenApiOAuthFlow = Microsoft.OpenApi.Models.OpenApiOAuthFlow;
-using OpenApiOAuthFlows = Microsoft.OpenApi.Models.OpenApiOAuthFlows;
-using OpenApiSecurityScheme = Microsoft.OpenApi.Models.OpenApiSecurityScheme;
 
 namespace Forum_Web_API
 {
@@ -62,47 +52,41 @@ namespace Forum_Web_API
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<ITopicService, TopicService>();
-            services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication("Bearer", options =>
-                {
-                    
-                    options.ApiName = "api1";
             
-                    // auth server base endpoint (this will be used to search for disco doc)
-                    options.Authority = "https://localhost:5000";
-                });
-            // services.AddAuthentication("Basic")
-            //     .AddScheme<AuthenticationsSchemeOptions>()
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.OperationFilter<AuthorizeCheckOperationFilter>();
-               
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Forum_Web_API", Version = "v1"});
-                c.AddSecurityDefinition("basic", new OpenApiSecurityScheme()
+                options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "basic",
-                    In = ParameterLocation.Header,
-                    Description = "Basic Auth Header"
+                    Description = "Demo Swagger API v1",
+                    Title = "Swagger with IdentityServer4",
+                    Version = "1.0.0"
                 });
-                // c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-                // {
-                //     Type = SecuritySchemeType.OAuth2,
-                //     Flows = new OpenApiOAuthFlows
-                //     {
-                //         AuthorizationCode = new OpenApiOAuthFlow
-                //         {
-                //             AuthorizationUrl = new Uri("https://localhost:5000/connect/authorize"),
-                //             TokenUrl = new Uri("https://localhost:5000/connect/token"),
-                //             Scopes = new Dictionary<string, string>
-                //             {
-                //                 {"api1", "Demo API - full access"}
-                //             }
-                //         }
-                //     }
-                // });
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement  
+                {  
+                    {  
+                        new OpenApiSecurityScheme  
+                        {  
+                            Reference = new OpenApiReference  
+                            {  
+                                Type = ReferenceType.SecurityScheme,  
+                                Id = "Bearer"  
+                            }  
+                        },  
+                        new string[] {}  
+  
+                    }  
+                });
+                
             });
+            
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -120,13 +104,14 @@ namespace Forum_Web_API
                     c.OAuthAppName("Demo API - Swagger");
                     c.OAuthUsePkce();
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Forum_Web_API v1");
+                   
                 });
                 
             }
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

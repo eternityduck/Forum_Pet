@@ -201,6 +201,10 @@
               "target": "Package",
               "version": "[6.4.4, )"
             },
+            "IdentityServer4": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            },
             "IdentityServer4.AccessTokenValidation": {
               "target": "Package",
               "version": "[3.0.1, )"
