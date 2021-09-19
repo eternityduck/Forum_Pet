@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Forum.ViewModels.UserViewModel
+namespace Forum_Web_API.ViewModels.UserViewModel
 {
     public class Profile
     {

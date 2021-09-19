@@ -8,9 +8,9 @@ namespace DAL
     {
         public static async Task InitializeAsync(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
-            string adminEmail = "admin@gmail.com";
-            string password = "123456";
-            string name = "Admin";
+            const string adminEmail = "admin@gmail.com";
+            const string password = "123456";
+            const string name = "Admin";
             if (await roleManager.FindByNameAsync("admin") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("admin"));

@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using BLL.Interfaces;
 using DAL.Models;
-using Forum.ViewModels;
-using Forum.ViewModels.Home;
-using Forum.ViewModels.PostViewModel;
-using Forum.ViewModels.TopicViewModel;
+using Forum_Web_API.ViewModels.Home;
+using Forum_Web_API.ViewModels.PostViewModel;
+using Forum_Web_API.ViewModels.TopicViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Forum.Controllers
+namespace Forum_Web_API.Controllers
 {
-    //TODO fix
+    
     [ApiController]
     [Route("[controller]")]
     public class HomeController : ControllerBase
@@ -46,7 +41,7 @@ namespace Forum.Controllers
                 AuthorId = x.Author.Id,
                 DatePosted = x.CreatedAt.ToString(),
                 RepliesCount = _postService.GetCommentsCount(x.Id),
-                //Topic = BuildTopicList(x)
+               // Topic = BuildTopicList(x),
             });
             
             return new HomeIndexViewModel()

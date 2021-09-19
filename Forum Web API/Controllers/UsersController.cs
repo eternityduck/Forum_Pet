@@ -2,19 +2,19 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DAL.Models;
-using Forum.ViewModels.UserViewModel;
+using Forum_Web_API.ViewModels.UserViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Forum.Controllers
+namespace Forum_Web_API.Controllers
 {
     [Authorize(Roles = "admin")]
     [ApiController]
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        UserManager<User> _userManager;
+        private readonly UserManager<User> _userManager;
 
         public UsersController(UserManager<User> userManager)
         {
@@ -27,63 +27,55 @@ namespace Forum.Controllers
         [HttpPost("/Add")]
         public async Task<ActionResult<CreateUserViewModel>> Create(CreateUserViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return model;
+            
+            User user = new User {Email = model.Email, UserName = model.Email, Name = model.Name };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
             {
-                User user = new User {Email = model.Email, UserName = model.Email, Name = model.Name };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
                 {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
             return model;
         }
-        [HttpGet("/Edit/{id}")]
-        public async Task<ActionResult<EditUserViewModel>> Edit(string id)
+        [HttpGet("/User/{id}")]
+        public async Task<ActionResult<User>> GetUser(string id)
         {
             User user = await _userManager.FindByIdAsync(id);
             if (user == null)
             {
                 return NotFound();
             }
-        
-            EditUserViewModel model = new EditUserViewModel
-                {Id = user.Id, Email = user.Email, UserName = user.Email};
-            return model;
+            return user;
         }
-
+        //TODO FIX
         [HttpPut("/Edit")]
         public async Task<ActionResult<EditUserViewModel>> Edit(EditUserViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return model;
+            User user = await _userManager.FindByIdAsync(model.Id);
+            if (user == null) return model;
+            user.Email = model.Email;
+            user.UserName = model.Email;
+            user.Name = model.Name;
+
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
             {
-                User user = await _userManager.FindByIdAsync(model.Id);
-                if (user != null)
-                {
-                    user.Email = model.Email;
-                    user.UserName = model.Email;
-                    user.Name = model.UserName;
+                return RedirectToAction("Index");
+            }
 
-
-                    var result = await _userManager.UpdateAsync(user);
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("Index");
-                    }
-
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                }
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
             }
 
             return model;
@@ -100,45 +92,31 @@ namespace Forum.Controllers
         
             return RedirectToAction("Index");
         }
-        // [HttpGet]
-        // public async Task<ActionResult<ChangePasswordViewModel>> ChangePassword(string id)
-        // {
-        //     User user = await _userManager.FindByIdAsync(id);
-        //     if (user == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //
-        //     ChangePasswordViewModel model = new ChangePasswordViewModel {Id = user.Id, Email = user.Email};
-        //     return model;
-        // }
         
         [HttpPost("/ChangePassword")]
         public async Task<ActionResult<ChangePasswordViewModel>> ChangePassword(ChangePasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return model;
+            User user = await _userManager.FindByIdAsync(model.Id);
+            if (user != null)
             {
-                User user = await _userManager.FindByIdAsync(model.Id);
-                if (user != null)
+                IdentityResult result =
+                    await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
                 {
-                    IdentityResult result =
-                        await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("Index");
-                    }
-        
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                    return RedirectToAction("Index");
                 }
-                else
+        
+                foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, "user not found");
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-        
+            else
+            {
+                ModelState.AddModelError(string.Empty, "user not found");
+            }
+
             return model;
         }
     }

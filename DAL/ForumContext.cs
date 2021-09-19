@@ -17,5 +17,19 @@ namespace DAL
         public DbSet<Comment> Comments { get; set; }
         
         public DbSet<Topic> Topics { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Comment>()
+                .HasOne(p => p.Post)
+                .WithMany(t => t.Comments)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.Topic)
+                .WithMany(x => x.Posts)
+                .OnDelete(DeleteBehavior.Cascade);
+            
+        }
     }
 }

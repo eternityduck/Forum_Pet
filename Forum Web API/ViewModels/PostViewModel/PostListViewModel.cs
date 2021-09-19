@@ -1,6 +1,6 @@
-﻿using Forum.ViewModels.TopicViewModel;
+﻿using Forum_Web_API.ViewModels.TopicViewModel;
 
-namespace Forum.ViewModels.PostViewModel
+namespace Forum_Web_API.ViewModels.PostViewModel
 {
     public class PostListViewModel
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Forum.ViewModels.CommentViewModel;
+using Forum_Web_API.ViewModels.CommentViewModel;
 
-namespace Forum.ViewModels.PostViewModel
+namespace Forum_Web_API.ViewModels.PostViewModel
 {
     public class PostIndexPostViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
-namespace Forum.ViewModels.UserViewModel
+namespace Forum_Web_API.ViewModels.UserViewModel
 {
     public class ChangeRoleViewModel
     {

@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
-using AutoMapper;
 using BLL.Interfaces;
 using DAL.Models;
-using Forum.ViewModels.CommentViewModel;
-using Forum.ViewModels.PostViewModel;
+using Forum_Web_API.ViewModels.CommentViewModel;
+using Forum_Web_API.ViewModels.PostViewModel;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Forum.Controllers
+namespace Forum_Web_API.Controllers
 {
-    //works
+   
     [ApiController]
     [Route("[controller]")]
     public class PostController : ControllerBase
@@ -63,8 +63,8 @@ namespace Forum.Controllers
         
         
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(int id)
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> Delete(int id)
         {
             await _service.DeleteByIdAsync(id);
             return NoContent();
@@ -85,8 +85,8 @@ namespace Forum.Controllers
         [Authorize]
         public async Task<IActionResult> AddPost(CreatePostViewModel model)
         {
-            var userId = _userManager.GetUserId(User);
-            var user = await _userManager.FindByIdAsync(userId);
+            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByNameAsync(model.AuthorName);
             var post = BuildPost(model, user);
 
             await _service.AddAsync(post);

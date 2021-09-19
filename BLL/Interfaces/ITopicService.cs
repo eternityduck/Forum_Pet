@@ -13,5 +13,6 @@ namespace BLL.Interfaces
         IEnumerable<Post> GetFilteredPosts(string searchQuery);
         IEnumerable<Post> GetFilteredPosts(int forumId, string modelSearchQuery);
         IEnumerable<User> GetUsers(int forumId);
+        Task<IEnumerable<Post>> GetRecentPostsAsync(int id, int days);
     }
 }

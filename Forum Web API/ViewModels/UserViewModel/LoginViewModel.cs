@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Forum.ViewModels.UserViewModel
+namespace Forum_Web_API.ViewModels.UserViewModel
 {
     public class LoginViewModel
     {
@@ -17,7 +17,6 @@ namespace Forum.ViewModels.UserViewModel
          
         [Display(Name = "Remember?")]
         public bool RememberMe { get; set; }
-         
-        public string ReturnUrl { get; set; }
+        
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Forum.ViewModels.CommentViewModel
+namespace Forum_Web_API.ViewModels.CommentViewModel
 {
     public class CommentIndexViewModel
     {
@@ -8,7 +8,6 @@ namespace Forum.ViewModels.CommentViewModel
 
         public string AuthorId { get; set; }
         public string AuthorName { get; set; }
-        //public bool IsAuthorAdmin { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public string Content { get; set; }

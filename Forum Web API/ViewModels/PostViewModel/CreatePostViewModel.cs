@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Forum.ViewModels.PostViewModel
+namespace Forum_Web_API.ViewModels.PostViewModel
 {
     public class CreatePostViewModel
     {

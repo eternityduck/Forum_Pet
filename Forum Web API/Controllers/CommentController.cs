@@ -2,13 +2,12 @@
 using System.Threading.Tasks;
 using BLL.Interfaces;
 using DAL.Models;
-using Forum.ViewModels.CommentViewModel;
+using Forum_Web_API.ViewModels.CommentViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 
-namespace Forum.Controllers
+namespace Forum_Web_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -27,20 +26,34 @@ namespace Forum.Controllers
             (_commentService, _userManager) = (service, userManager);
         }
 
-
+        [HttpGet]
+        public async Task<CommentIndexViewModel> Index(int id)
+        {
+            var comment = await _commentService.GetByIdAsync(id);
+            
+            var model = new CommentIndexViewModel()
+            {
+                Id = comment.Id,
+                Content = comment.Text,
+                AuthorId = comment.Author.Id,
+                AuthorName = comment.Author.Name,
+                CreatedAt = comment.CreatedAt,
+            };
+            return model;
+        }
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         [Route("~/Comment")]
         [Authorize]
         public async Task<IActionResult> AddComment(CommentIndexViewModel commentIndexModel)
         {
-            var userId = _userManager.GetUserId(User);
-            var user = await _userManager.FindByIdAsync(userId);
+            //var userId = _userManager.GetUserId(User);
+            var user = await _userManager.FindByNameAsync(commentIndexModel.AuthorName);
+            //var user = await _userManager.FindByNameAsync(userName);
             var comment = CommentCreate(commentIndexModel, user);
 
             await _postService.AddCommentAsync(comment);
 
-            return RedirectToAction("Index", "Post", new {id = commentIndexModel.PostId});
+            return CreatedAtAction(nameof(Index),  new { id = comment.Id }, comment);
         }
 
         private Comment CommentCreate(CommentIndexViewModel model, User user)
@@ -54,40 +67,14 @@ namespace Forum.Controllers
                 Author = user
             };
         }
-
-        // [HttpGet("/Comment/Create/{id}")]
-        // [Authorize]
-        // public async Task<CommentIndexViewModel> Create(int id)
-        // {
-        //     var post = _postService.GetById(id);
-        //     var topic = await _topicService.GetByIdAsync(post.Topic.Id);
-        //     var user = await _userManager.FindByNameAsync(User.Identity.Name);
-        //          
-        //     var model = new CommentIndexViewModel()
-        //     {
-        //         PostContent = post.Text,
-        //         PostTitle = post.Title,
-        //         PostId = post.Id,
-        //
-        //         TopicName = topic.Title,
-        //         TopicId = topic.Id,
-        //
-        //         AuthorName = User.Identity.Name,
-        //        
-        //         AuthorId = user.Id,
-        //         
-        //         CreatedAt = DateTime.Now
-        //     };
-        //
-        //     return model;
-        // }
+        
         [HttpDelete("/Delete/{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> Delete(int id)
         {
-            var post = await _commentService.GetByIdAsync(id);
+            var comment = await _commentService.GetByIdAsync(id);
 
-            if (post == null)
+            if (comment == null)
             {
                 return NotFound();
             }
@@ -97,15 +84,7 @@ namespace Forum.Controllers
         }
 
 
-        // [HttpPost, ActionName("Delete")]
-        // [ValidateAntiForgeryToken]
-        // [Authorize(Roles = "Admin")]
-        // [Route("Comment/Delete/{id}")]
-        // public async Task<ActionResult> DeleteConfirmed(int id)
-        // {
-        //     await _commentService.DeleteByIdAsync(id);
-        //     return Ok();
-        // }
+        
 
         [HttpPut]
         [Route("/Edit/{id}")]
@@ -115,7 +94,7 @@ namespace Forum.Controllers
             var userId = _userManager.GetUserId(User);
             var user = await _userManager.FindByIdAsync(userId);
             var comment = await _commentService.GetByIdAsync(id);
-            if (comment != null || user.Id != comment.Author.Id) return BadRequest();
+            if (comment != null || user.Id != comment.Author.Id) return BadRequest("The comment is null or you are not the owner of comment");
             await _commentService.UpdateAsync(id, message);
             return Ok();
         }

@@ -19,29 +19,5 @@ namespace BLL.Services
             _context = context;
         }
         
-        public Task<IEnumerable<User>> GetAllAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<User> GetByIdAsync(int id)
-        {
-            return await _context.Users.FindAsync(id);
-        }
-
-        public Task AddAsync(User model)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task UpdateAsync(User model)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task DeleteByIdAsync(int modelId)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Forum.ViewModels.PostViewModel;
+using Forum_Web_API.ViewModels.PostViewModel;
 
-namespace Forum.ViewModels.TopicViewModel
+namespace Forum_Web_API.ViewModels.TopicViewModel
 {
     public class TopicResultViewModel
     {

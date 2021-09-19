@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Forum.ViewModels.TopicViewModel
+namespace Forum_Web_API.ViewModels.TopicViewModel
 {
     public class TopicIndexViewModel
     {

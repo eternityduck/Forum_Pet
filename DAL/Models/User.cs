@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Microsoft.AspNetCore.Identity;
 
 namespace DAL.Models
@@ -7,6 +8,6 @@ namespace DAL.Models
     {
         public string Name { get; set; }
         public DateTime MemberSince { get; set; }
-        //public bool IsAdmin { get; set; }
+        
     }
 }

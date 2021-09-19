@@ -241,6 +241,10 @@
               "target": "Package",
               "version": "[6.2.1, )"
             },
+            "Swashbuckle.AspNetCore.Newtonsoft": {
+              "target": "Package",
+              "version": "[6.2.1, )"
+            },
             "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
               "version": "[6.2.1, )"

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -63,7 +64,7 @@ namespace BLL.Services
         public async Task UpdateTopicDescription(int id, string desc)
         {
             var topic =await GetByIdAsync(id);
-            topic.Title = desc;
+            topic.Description = desc;
             
             _context.Topics.Update(topic);
             await _context.SaveChangesAsync();
@@ -115,6 +116,13 @@ namespace BLL.Services
             if (posts is null || !posts.Any())
                 return new List<User>();
             return _postService.GetAllUsers(posts);
+        }
+
+        public async Task<IEnumerable<Post>> GetRecentPostsAsync(int id, int days)
+        {
+            var topics = await GetByIdAsync(id);
+
+            return topics.Posts.Where(x => (DateTime.Now - x.CreatedAt).TotalDays < days);
         }
     }
 }

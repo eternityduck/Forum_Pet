@@ -88,3 +88,7 @@ D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Annotatio
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\IdentityServer4.dll
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\IdentityServer4.Storage.dll
 D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+D:\Forum Web API\Forum Web API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Newtonsoft.dll

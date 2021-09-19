@@ -2,16 +2,16 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DAL.Models;
-using Forum.ViewModels.UserViewModel;
+using Forum_Web_API.ViewModels.UserViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Forum.Controllers
+namespace Forum_Web_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     public class RolesController : ControllerBase
     {
         private readonly RoleManager<IdentityRole> _roleManager;

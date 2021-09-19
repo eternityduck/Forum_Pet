@@ -2,12 +2,12 @@
 using System.Linq;
 using BLL.Interfaces;
 using DAL.Models;
-using Forum.ViewModels.PostViewModel;
-using Forum.ViewModels.SearchViewModel;
-using Forum.ViewModels.TopicViewModel;
+using Forum_Web_API.ViewModels.PostViewModel;
+using Forum_Web_API.ViewModels.SearchViewModel;
+using Forum_Web_API.ViewModels.TopicViewModel;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Forum.Controllers
+namespace Forum_Web_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -20,71 +20,14 @@ namespace BLL.Services
         {
             _context = context;
         }
-
-        // public async Task<IEnumerable<PostModel>> GetAllAsync()
-        // {
-        //     var result = _mapper.Map<IEnumerable<Post>, List<PostModel>>(await _unitOfWork.Posts.GetAllAsync());
-        //     
-        //     return result;
-        // }
-        //
-        // Task<Post> ICrud<Post>.GetByIdAsync(int id)
-        // {
-        //     throw new System.NotImplementedException();
-        // }
-        //
         
-        //
-        // public async Task<PostModel> GetByIdAsync(int id) =>
-        //     _mapper.Map<PostModel>(await _unitOfWork.Posts.GetByIdAsync(id));
-        //
-        // public async Task AddAsync(PostModel model)
-        // {
-        //     if (model == null)
-        //         throw new ForumException("Can not be null");
-        //     if (string.IsNullOrEmpty(model.Text))
-        //         throw new ForumException("The post can not be null");
-        //     if (string.IsNullOrEmpty(model.Title))
-        //         throw new ForumException("The title can not be empty");
-        //
-        //     var item = _mapper.Map<Post>(model);
-        //     await _unitOfWork.Posts.AddAsync(item);
-        //     await _unitOfWork.SaveAsync();
-        // }
-        //
-        // public async Task UpdateAsync(PostModel model)
-        // {
-        //     if (model == null)
-        //         throw new ForumException("Can not be null");
-        //     if (string.IsNullOrEmpty(model.Text))
-        //         throw new ForumException("The post can not be null");
-        //     if (string.IsNullOrEmpty(model.Title))
-        //         throw new ForumException("The title can not be empty");
-        //     
-        //     _unitOfWork.Posts.Update(_mapper.Map<Post>(model));
-        //     await _unitOfWork.SaveAsync();
-        // }
-        //
-        // public async Task DeleteByIdAsync(int modelId)
-        // {
-        //     await _mapper.Map<Task>(_unitOfWork.Posts.RemoveByIdAsync(modelId));
-        //     await _unitOfWork.SaveAsync();
-        // }
-
-        // public async Task AddCommentAsync(Comment comment)
-        // {
-        //     await _unitOfWork.Comments.AddAsync(_mapper.Map<Comment>(comment));
-        //     await _unitOfWork.SaveAsync();
-        // }
 
         public async Task AddCommentAsync(Comment comment)
         {
             await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
         }
-
         
-
         public async Task EditPostContent(int id, string content)
         {
             var post = await GetByIdAsync(id);
@@ -105,7 +48,7 @@ namespace BLL.Services
 
         public IEnumerable<Post> GetPostsByTopicId(int id)
         {
-            return _context.Topics.First(x => x.Id == id).Posts;
+            return _context.Topics.Include(x => x.Posts).First(x => x.Id == id).Posts;
         }
         
 
@@ -150,7 +93,7 @@ namespace BLL.Services
             {
                 users.Add(post.Author);
 
-                if (!post.Comments.Any()) continue;
+                if (post.Comments == null) continue;
 
                 users.AddRange(post.Comments.Select(reply => reply.Author));
             }
@@ -175,7 +118,8 @@ namespace BLL.Services
 
         public async Task DeleteByIdAsync(int modelId)
         {
-            _context.Posts.Remove(await GetByIdAsync(modelId));
+            var model = await _context.Posts.Include(x => x.Comments).SingleOrDefaultAsync(x=>x.Id == modelId);
+            _context.Remove(model);
             await _context.SaveChangesAsync();
         }
 

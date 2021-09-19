@@ -4,7 +4,7 @@ using DAL.Models;
 
 namespace BLL.Interfaces
 {
-    public interface IUserService : ICrud<User>
+    public interface IUserService
     {
         
     }
