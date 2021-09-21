@@ -95,7 +95,7 @@ namespace Forum_Web_API.Controllers
 
                 await _userManager.RemoveFromRolesAsync(user, removedRoles);
 
-                return RedirectToAction("UserList");
+                return Ok($"Successfully updated the role list of {user.Name}");
             }
 
             return NotFound();
