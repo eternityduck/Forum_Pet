@@ -20,7 +20,7 @@ namespace Forum_Web_API.Controllers
             _postService = postService;
         }
 
-        // GET
+        
         [HttpGet]
         public ActionResult<SearchResultViewModel> Results(string searchQuery)
         {
@@ -55,10 +55,5 @@ namespace Forum_Web_API.Controllers
             };
             return topicList;
         }
-        // [HttpPost]
-        // public ActionResult Search([FromForm] string searchQuery)
-        // {
-        //     return RedirectToAction("Results", new {searchQuery});
-        // }
     }
 }

@@ -53,27 +53,7 @@ namespace Forum_Web_API.Controllers
   
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });  
         }  
-        // public async Task<ActionResult<RegisterViewModel>> Register(RegisterViewModel model)
-        // {
-        //     if (ModelState.IsValid)
-        //     {
-        //         User user = new User {Email = model.Email, UserName = model.Email, Name = model.Name};
-        //
-        //         var result = await _userManager.CreateAsync(user, model.Password);
-        //         if (result.Succeeded)
-        //         {
-        //             await _signInManager.SignInAsync(user, false);
-        //             return RedirectToAction("Index", "Home");
-        //         }
-        //
-        //         foreach (var error in result.Errors)
-        //         {
-        //             ModelState.AddModelError(string.Empty, error.Description);
-        //         }
-        //     }
-        //
-        //     return model;
-        // }
+        
         
 
         [HttpPost("/Login")]
@@ -107,28 +87,7 @@ namespace Forum_Web_API.Controllers
                 expiration = token.ValidTo  
             });
         }  
-        //[ValidateAntiForgeryToken]
-        // public async Task<ActionResult<LoginViewModel>> Login(LoginViewModel model)
-        // {
-        //     if (ModelState.IsValid)
-        //     {
-        //         var result =
-        //             await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-        //         if (result.Succeeded)
-        //         {
-        //             if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-        //             {
-        //                 return Redirect(model.ReturnUrl);
-        //             }
-        //
-        //             return RedirectToAction("Index", "Home");
-        //         }
-        //
-        //         ModelState.AddModelError("", "Incorrect login or password");
-        //     }
-        //
-        //     return model;
-        // }
+        
 
         [HttpPost("/Logout")]
         [Authorize]

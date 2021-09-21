@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace Forum_Web_API.Controllers
         [HttpGet]
         public TopicIndexViewModel Index()
         {
-            var forums = _topicService.GetAllAsync().Result.Select(topic => new TopicListViewModel
+            var topics = _topicService.GetAllAsync().Result.Select(topic => new TopicListViewModel
             {
                 Id = topic.Id,
                 Name = topic.Title,
@@ -32,19 +33,32 @@ namespace Forum_Web_API.Controllers
                 NumberOfUsers = _topicService.GetUsers(topic.Id).Count(),
             });
 
-            var forumListingModels = forums as IList<TopicListViewModel> ?? forums.ToList();
+            var topicListing = topics as IList<TopicListViewModel> ?? topics.ToList();
 
             var model = new TopicIndexViewModel()
             {
-                TopicList = forumListingModels.OrderBy(forum=>forum.Name),
-                NumberOfTopics = forumListingModels.Count
+                TopicList = topicListing.OrderBy(forum=>forum.Name),
+                NumberOfTopics = topicListing.Count
             };
 
             return model;
         }
-        
-        
-        [Route("~/Topic/{id}/{searchQuery?}")]
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateTopicTitle(int id, string title)
+        {
+            try
+            {
+                await _topicService.UpdateTopicTitle(id, title);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Error id of topic");
+            }
+
+            return Ok("Successfully updated the topic title");
+        }
+        [Route("/Topic/{id}/{searchQuery?}")]
         [HttpGet]
         public async Task<TopicResultViewModel> Topic(int id, string searchQuery)
         {

@@ -36,7 +36,7 @@ namespace Forum_Web_API.Controllers
                 Id = comment.Id,
                 Content = comment.Text,
                 AuthorId = comment.Author.Id,
-                AuthorName = comment.Author.Name,
+                AuthorEmail = comment.Author.Name,
                 CreatedAt = comment.CreatedAt,
             };
             return model;
@@ -44,11 +44,10 @@ namespace Forum_Web_API.Controllers
         [HttpPost]
         [Route("~/Comment")]
         [Authorize]
+        //Type the email not the name
         public async Task<IActionResult> AddComment(CommentIndexViewModel commentIndexModel)
         {
-            //var userId = _userManager.GetUserId(User);
-            var user = await _userManager.FindByNameAsync(commentIndexModel.AuthorName);
-            //var user = await _userManager.FindByNameAsync(userName);
+            var user = await _userManager.FindByEmailAsync(commentIndexModel.AuthorEmail);
             var comment = CommentCreate(commentIndexModel, user);
 
             await _postService.AddCommentAsync(comment);
@@ -89,12 +88,12 @@ namespace Forum_Web_API.Controllers
         [HttpPut]
         [Route("/Edit/{id}")]
         [Authorize]
-        public async Task<ActionResult<Comment>> EditAsync(int id, string message)
+        public async Task<ActionResult<Comment>> EditAsync(string userEmail, int id, string message)
         {
-            var userId = _userManager.GetUserId(User);
-            var user = await _userManager.FindByIdAsync(userId);
+            //var userId = _userManager.GetUserId(User);
+            var user = await _userManager.FindByEmailAsync(userEmail);
             var comment = await _commentService.GetByIdAsync(id);
-            if (comment != null || user.Id != comment.Author.Id) return BadRequest("The comment is null or you are not the owner of comment");
+            if (comment == null || user.Id != comment.Author.Id) return BadRequest("The comment is null or you are not the owner of comment");
             await _commentService.UpdateContentAsync(id, message);
             return Ok();
         }

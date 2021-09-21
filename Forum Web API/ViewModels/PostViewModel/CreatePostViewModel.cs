@@ -11,6 +11,6 @@ namespace Forum_Web_API.ViewModels.PostViewModel
         public string Content { get; set; }
         public DateTime Created { get; set; }
         public string UserId { get; set; }
-        public string AuthorName { get; set; }
+        public string AuthorEmail { get; set; }
     }
 }

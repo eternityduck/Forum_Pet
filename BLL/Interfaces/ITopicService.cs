@@ -8,8 +8,6 @@ namespace BLL.Interfaces
     public interface ITopicService : ICrud<Topic>
     {
         Task UpdateTopicTitle(int id, string title);
-        
-       
         IEnumerable<Post> GetFilteredPosts(string searchQuery);
         IEnumerable<Post> GetFilteredPosts(int forumId, string modelSearchQuery);
         IEnumerable<User> GetUsers(int forumId);

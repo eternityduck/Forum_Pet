@@ -9,5 +9,6 @@ namespace DAL.Models
         public string Name { get; set; }
         public DateTime MemberSince { get; set; }
         
+        
     }
 }

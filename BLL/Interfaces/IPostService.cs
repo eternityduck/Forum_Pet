@@ -10,12 +10,12 @@ namespace BLL.Interfaces
         Task AddCommentAsync(Comment comment);
         
         int GetCommentsCount(int id);
-        IEnumerable<Post> GetPostsByUserId(int id);
-        IEnumerable<Post> GetPostsByTopicId(int id);
+        Task<IEnumerable<Post>> GetPostsByUserEmail(string userEmail);
+        Task<IEnumerable<Post>> GetPostsByTopicId(int id);
         IEnumerable<Post> GetFilteredPosts(string searchQuery);
         Post GetById(int id);
         IEnumerable<User> GetAllUsers(IEnumerable<Post> posts);
-        IEnumerable<Post> GetLatestPosts(int count);
-        IEnumerable<Post> GetAll();
+        Task<IEnumerable<Post>> GetLatestPosts(int count);
+        
     }
 }

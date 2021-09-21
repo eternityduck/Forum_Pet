@@ -30,6 +30,7 @@ namespace DAL
                 .WithMany(x => x.Posts)
                 .OnDelete(DeleteBehavior.Cascade);
             
+                
         }
     }
 }

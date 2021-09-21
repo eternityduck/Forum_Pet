@@ -48,9 +48,9 @@ namespace Forum_Web_API
                 })
                 .AddEntityFrameworkStores<ForumContext>().AddDefaultTokenProviders();  
 
-            var mapperProfile = new AutoMapperProfile();
-            var mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile(mapperProfile));
-            services.AddScoped(m => new Mapper(mapperConfiguration));
+            // var mapperProfile = new AutoMapperProfile();
+            // var mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile(mapperProfile));
+            // services.AddScoped(m => new Mapper(mapperConfiguration));
 
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<ICommentService, CommentService>();

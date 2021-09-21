@@ -55,14 +55,16 @@ namespace BLL.Services
             }
         }
 
-        public IEnumerable<Post> GetPostsByUserId(int id)
+        public async Task<IEnumerable<Post>> GetPostsByUserEmail(string userEmail)
         {
-            return _context.Posts.Where(x => x.Author.Id == id.ToString());
+            var result = await _context.Posts.Where(x => x.Author.Email == userEmail).ToListAsync();
+            return result;
         }
 
-        public IEnumerable<Post> GetPostsByTopicId(int id)
+        public async Task<IEnumerable<Post>> GetPostsByTopicId(int id)
         {
-            return _context.Topics.Include(x => x.Posts).First(x => x.Id == id).Posts;
+            var result = await _context.Topics.Include(x => x.Posts).FirstOrDefaultAsync(x => x.Id == id);
+            return result.Posts;
         }
         
 
@@ -74,12 +76,7 @@ namespace BLL.Services
                 .ToListAsync();
         }
 
-        public IEnumerable<Post> GetAll()
-        {
-            return _context.Posts
-                .Include(x => x.Author)
-                .Include(x => x.Comments).ThenInclude(x => x.Author).Include(x => x.Topic);
-        }
+        
         public async Task<Post> GetByIdAsync(int id)
         {
             return await _context.Posts.Where(x => x.Id == id)
@@ -95,9 +92,10 @@ namespace BLL.Services
                 .Include(post=>post.Topic)
                 .First();
         }
-        public IEnumerable<Post> GetLatestPosts(int count)
+        public async Task<IEnumerable<Post>> GetLatestPosts(int count)
         {
-            return GetAll().OrderByDescending(p => p.CreatedAt).Take(count).ToList();
+            var result = await GetAllAsync();
+            return result.OrderByDescending(p => p.CreatedAt).Take(count).ToList();
         }
         public IEnumerable<User> GetAllUsers(IEnumerable<Post> posts)
         {

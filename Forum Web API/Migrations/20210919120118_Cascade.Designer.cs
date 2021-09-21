@@ -168,7 +168,7 @@ namespace Forum_Web_API.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
+                        
                     b.ToTable("AspNetUsers");
                 });
 

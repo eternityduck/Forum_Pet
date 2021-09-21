@@ -27,7 +27,7 @@ namespace Forum_Web_API.Controllers
         [HttpPost("/Add")]
         public async Task<ActionResult<CreateUserViewModel>> Create(CreateUserViewModel model)
         {
-            if (!ModelState.IsValid) return model;
+            if (!ModelState.IsValid) return BadRequest("Incorrect data");
             
             User user = new User {Email = model.Email, UserName = model.Email, Name = model.Name };
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -35,12 +35,10 @@ namespace Forum_Web_API.Controllers
             {
                 return RedirectToAction("Index");
             }
-            else
+
+            foreach (var error in result.Errors)
             {
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                ModelState.AddModelError(string.Empty, error.Description);
             }
 
             return model;

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using BLL.Interfaces;
 using DAL.Models;
 using Forum_Web_API.ViewModels.Home;
@@ -22,16 +23,16 @@ namespace Forum_Web_API.Controllers
             _postService = postService;
         }
         [HttpGet]
-        public HomeIndexViewModel Index()
+        public async Task<HomeIndexViewModel> Index()
         {
-            var model = BuildHome();
+            var model = await BuildHome();
             return model;
         }
 
-        private HomeIndexViewModel BuildHome()
+        private async Task<HomeIndexViewModel> BuildHome()
         {
             
-            var latest =  _postService.GetLatestPosts(10);
+            var latest = await _postService.GetLatestPosts(10);
 
             var posts = latest.Select(x => new PostListViewModel()
             {
@@ -41,7 +42,6 @@ namespace Forum_Web_API.Controllers
                 AuthorId = x.Author.Id,
                 DatePosted = x.CreatedAt.ToString(),
                 RepliesCount = _postService.GetCommentsCount(x.Id),
-               // Topic = BuildTopicList(x),
             });
             
             return new HomeIndexViewModel()
@@ -49,28 +49,5 @@ namespace Forum_Web_API.Controllers
                 LatestPosts = posts
             };
         }
-
-        private TopicListViewModel BuildTopicList(Post post)
-        {
-            var topic = post.Topic;
-            var topicList = new TopicListViewModel()
-            {
-                Name = topic.Title,
-                Id = topic.Id,
-                Description = topic.Description
-            };
-            return topicList;
-        }
-
-        // [HttpGet("/Search")]
-        // public IActionResult Search(string searchQuery)
-        // {
-        //     return RedirectToAction("Topic", "Topic", new { searchQuery });
-        // }
-
-        // public IActionResult Privacy()
-        // {
-        //     return View();
-        // }
     }
 }

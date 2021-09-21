@@ -64,28 +64,7 @@ namespace Web_Api_Tests
                 Assert.AreEqual(result.Title, "second post");
             }
         }
-
-        [Test]
-        public void Get_All_Posts_Returns_All_Posts()
-        {
-            var options = new DbContextOptionsBuilder<ForumContext>()
-                .UseInMemoryDatabase(databaseName: "GetAll_Db").Options;
-
-            using (var ctx = new ForumContext(options))
-            {
-                ctx.Posts.Add(new Post {Id = 21341, Title = "first post"});
-                ctx.Posts.Add(new Post {Id = 8144, Title = "second post"});
-                ctx.Posts.Add(new Post {Id = 1245, Title = "third post"});
-                ctx.SaveChanges();
-            }
-
-            using (var ctx = new ForumContext(options))
-            {
-                var postService = new PostService(ctx);
-                var result = postService.GetAll();
-                Assert.AreEqual(3, result.Count());
-            }
-        }
+        
 
         [Test]
         public async Task Checking_Reply_Count_Returns_Number_Of_Replies()
@@ -166,9 +145,9 @@ namespace Web_Api_Tests
             await using (var ctx = new ForumContext(options))
             {
                 var postService = new PostService(ctx);
-                var result = postService.GetPostsByTopicId(21).ToList();
-                Assert.AreEqual(2, result.Count);
-                Assert.AreEqual("Post 1", result[0].Title);
+                var result = await postService.GetPostsByTopicId(21);
+                Assert.AreEqual(2, result.ToList().Count);
+                Assert.AreEqual("Post 1", result.ToList()[0].Title);
             }
         }
         [Test]
@@ -179,7 +158,7 @@ namespace Web_Api_Tests
 
             await using (var ctx = new ForumContext(options))
             {
-                var user = ctx.Users.Add(new User() {Id = "21", });
+                var user = ctx.Users.Add(new User() {Id = "21", Email = "123@gmail.com"});
                 ctx.Posts.Add(new Post()
                 {
                     Id = 1234, Title = "Post 1", Author = user.Entity
@@ -195,9 +174,9 @@ namespace Web_Api_Tests
             await using (var ctx = new ForumContext(options))
             {
                 var postService = new PostService(ctx);
-                var result = postService.GetPostsByUserId(21).ToList();
-                Assert.AreEqual(2, result.Count);
-                Assert.AreEqual("Post 1", result[0].Title);
+                var result = await postService.GetPostsByUserEmail("123@gmail.com");
+                Assert.AreEqual(2, result.ToList().Count);
+                Assert.AreEqual("Post 1", result.ToList()[0].Title);
             }
         }
 
@@ -239,8 +218,8 @@ namespace Web_Api_Tests
             await using (var ctx = new ForumContext(options))
             {
                 var postService = new PostService(ctx);
-                var result = postService.GetLatestPosts(1).ToList();
-                Assert.AreEqual(result[0].Text, "Test");
+                var result = await postService.GetLatestPosts(1);
+                Assert.AreEqual(result.ToList()[0].Text, "Test");
             }
         }
 
