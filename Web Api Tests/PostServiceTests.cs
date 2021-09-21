@@ -12,12 +12,12 @@ namespace Web_Api_Tests
 {
     public class PostServiceTests
     {
-       
+
 
         [Test]
         public async Task Create_Post_Creates_New_Post_Via_Context()
         {
-            
+
             var options = new DbContextOptionsBuilder<ForumContext>()
                 .UseInMemoryDatabase("Add_Post_Writes_Post_To_Database").Options;
 
@@ -42,6 +42,7 @@ namespace Web_Api_Tests
                 Assert.AreEqual("writing functional javascript", ctx.Posts.SingleAsync().Result.Title);
             }
         }
+
         [Test]
         public void Get_Post_By_Id_Returns_Correct_Post()
         {
@@ -50,9 +51,9 @@ namespace Web_Api_Tests
 
             using (var ctx = new ForumContext(options))
             {
-                ctx.Posts.Add(new Post { Id = 1986, Title = "first post" });
-                ctx.Posts.Add(new Post { Id = 223, Title = "second post" });
-                ctx.Posts.Add(new Post { Id = 12, Title = "third post" });
+                ctx.Posts.Add(new Post {Id = 1986, Title = "first post"});
+                ctx.Posts.Add(new Post {Id = 223, Title = "second post"});
+                ctx.Posts.Add(new Post {Id = 12, Title = "third post"});
                 ctx.SaveChanges();
             }
 
@@ -63,7 +64,8 @@ namespace Web_Api_Tests
                 Assert.AreEqual(result.Title, "second post");
             }
         }
-         [Test]
+
+        [Test]
         public void Get_All_Posts_Returns_All_Posts()
         {
             var options = new DbContextOptionsBuilder<ForumContext>()
@@ -71,9 +73,9 @@ namespace Web_Api_Tests
 
             using (var ctx = new ForumContext(options))
             {
-                ctx.Posts.Add(new Post { Id = 21341, Title = "first post" });
-                ctx.Posts.Add(new Post { Id = 8144, Title = "second post" });
-                ctx.Posts.Add(new Post { Id = 1245, Title = "third post" });
+                ctx.Posts.Add(new Post {Id = 21341, Title = "first post"});
+                ctx.Posts.Add(new Post {Id = 8144, Title = "second post"});
+                ctx.Posts.Add(new Post {Id = 1245, Title = "third post"});
                 ctx.SaveChanges();
             }
 
@@ -128,15 +130,15 @@ namespace Web_Api_Tests
                 .UseInMemoryDatabase("Edit_DataBase").Options;
             await using (var ctx = new ForumContext(options))
             {
-                ctx.Posts.Add(new Post { Id = 21342, Title = "first post" });
+                ctx.Posts.Add(new Post {Id = 21342, Title = "first post"});
                 await ctx.SaveChangesAsync();
             }
 
             await using (var ctx = new ForumContext(options))
             {
                 var postService = new PostService(ctx);
-                await postService.EditPostContent(21342, "new post content");
-                Assert.AreEqual(ctx.Posts.Find(21342).Text, "new post content");
+                await postService.UpdateContentAsync(21342, "new post content");
+                Assert.AreEqual((await ctx.Posts.FindAsync(21342)).Text, "new post content");
             }
         }
 
@@ -145,10 +147,10 @@ namespace Web_Api_Tests
         {
             var options = new DbContextOptionsBuilder<ForumContext>()
                 .UseInMemoryDatabase("GetPostsByTopic_DataBase").Options;
-            
+
             await using (var ctx = new ForumContext(options))
             {
-                var topic = ctx.Topics.Add(new Topic() { Id = 21, Title = "New Topic"});
+                var topic = ctx.Topics.Add(new Topic() {Id = 21, Title = "New Topic"});
                 ctx.Posts.Add(new Post()
                 {
                     Id = 1234, Title = "Post 1", Topic = topic.Entity
@@ -157,17 +159,48 @@ namespace Web_Api_Tests
                 {
                     Id = 1235, Title = "Post 1", Topic = topic.Entity
                 });
-                
+
                 await ctx.SaveChangesAsync();
             }
+
             await using (var ctx = new ForumContext(options))
             {
                 var postService = new PostService(ctx);
                 var result = postService.GetPostsByTopicId(21).ToList();
-                Assert.AreEqual(2, result.Count());
+                Assert.AreEqual(2, result.Count);
                 Assert.AreEqual("Post 1", result[0].Title);
             }
         }
+        [Test]
+        public async Task GetPostsByUserId_Returns_CorrectPosts()
+        {
+            var options = new DbContextOptionsBuilder<ForumContext>()
+                .UseInMemoryDatabase("GetPostsByUser_DataBase").Options;
+
+            await using (var ctx = new ForumContext(options))
+            {
+                var user = ctx.Users.Add(new User() {Id = "21", });
+                ctx.Posts.Add(new Post()
+                {
+                    Id = 1234, Title = "Post 1", Author = user.Entity
+                });
+                ctx.Posts.Add(new Post()
+                {
+                    Id = 1235, Title = "Post 1", Author = user.Entity
+                });
+
+                await ctx.SaveChangesAsync();
+            }
+
+            await using (var ctx = new ForumContext(options))
+            {
+                var postService = new PostService(ctx);
+                var result = postService.GetPostsByUserId(21).ToList();
+                Assert.AreEqual(2, result.Count);
+                Assert.AreEqual("Post 1", result[0].Title);
+            }
+        }
+
         [Test]
         public async Task GetAllAsync_ReturnsAllPosts()
         {
@@ -176,10 +209,10 @@ namespace Web_Api_Tests
 
             await using (var ctx = new ForumContext(options))
             {
-                ctx.Posts.Add(new Post { Id = 21341, Title = "first post" });
-                ctx.Posts.Add(new Post { Id = 8144, Title = "second post" });
-                ctx.Posts.Add(new Post { Id = 1245, Title = "third post" });
-                ctx.SaveChanges();
+                ctx.Posts.Add(new Post {Id = 21341, Title = "first post"});
+                ctx.Posts.Add(new Post {Id = 8144, Title = "second post"});
+                ctx.Posts.Add(new Post {Id = 1245, Title = "third post"});
+                await ctx.SaveChangesAsync();
             }
 
             await using (var ctx = new ForumContext(options))
@@ -197,15 +230,16 @@ namespace Web_Api_Tests
                 .UseInMemoryDatabase(databaseName: "GetLatestPosts").Options;
             await using (var ctx = new ForumContext(options))
             {
-                ctx.Posts.Add(new Post { Id = 9090, Title = "first post"});
-                ctx.Posts.Add(new Post { Id = 9999, Title = "second post", CreatedAt = DateTime.Parse("11/11/2000")});
-                ctx.Posts.Add(new Post { Id = 3333, Title = "third post", CreatedAt = DateTime.Now, Text = "Test"});
-                ctx.SaveChanges();
+                ctx.Posts.Add(new Post {Id = 9090, Title = "first post"});
+                ctx.Posts.Add(new Post {Id = 9999, Title = "second post", CreatedAt = DateTime.Parse("11/11/2000")});
+                ctx.Posts.Add(new Post {Id = 3333, Title = "third post", CreatedAt = DateTime.Now, Text = "Test"});
+                await ctx.SaveChangesAsync();
             }
+
             await using (var ctx = new ForumContext(options))
             {
                 var postService = new PostService(ctx);
-                var result =  postService.GetLatestPosts(1).ToList();
+                var result = postService.GetLatestPosts(1).ToList();
                 Assert.AreEqual(result[0].Text, "Test");
             }
         }
@@ -215,30 +249,52 @@ namespace Web_Api_Tests
         {
             var options = new DbContextOptionsBuilder<ForumContext>()
                 .UseInMemoryDatabase(databaseName: "GetAllUsersFromPost").Options;
-            
-
-            // List<User> users = new List<User>()
-            // {
-            //     user1, user2, user3
-            // };
-            // await using (var ctx = new ForumContext(options))
-            // {
-            //     ctx.Users.AddRange(users);
-            //     await ctx.SaveChangesAsync();
-            // }
 
             await using (var ctx = new ForumContext(options))
             {
-                ctx.Posts.Add(new Post { Id = 121, Title = "first post", Author = new User() { Id = "2223", Name = "Ivan"} });
-                ctx.Posts.Add(new Post { Id = 2121, Title = "second post", Author = new User() { Id = "1122", Name = "Bob" } });
-                ctx.Posts.Add(new Post { Id = 21212121, Title = "third post", Text = "Test", Author = new User() { Id = "3333", Name = "Test" } });
+                ctx.Posts.Add(new Post
+                    {Id = 121, Title = "first post", Author = new User() {Id = "2223", Name = "Ivan"}});
+                ctx.Posts.Add(new Post
+                    {Id = 2121, Title = "second post", Author = new User() {Id = "1122", Name = "Bob"}});
+                ctx.Posts.Add(new Post
+                {
+                    Id = 21212121, Title = "third post", Text = "Test", Author = new User() {Id = "3333", Name = "Test"}
+                });
                 await ctx.SaveChangesAsync();
             }
+
             await using (var ctx = new ForumContext(options))
             {
                 var postService = new PostService(ctx);
-                var result = postService.GetAllUsers(ctx.Posts).ToList();
+                var result = postService.GetAllUsers(ctx.Posts.Include(x => x.Author)).ToList();
                 Assert.AreEqual(3, result.Count);
+            }
+        }
+
+        [Test]
+        public void GetCommentsCount_Returns_CorrectNumber_Of_Comments()
+        {
+            var options = new DbContextOptionsBuilder<ForumContext>()
+                .UseInMemoryDatabase(databaseName: "GetComments_Count_Database").Options;
+
+            using (var ctx = new ForumContext(options))
+            {
+                ctx.Posts.Add(new Post
+                    {Id = 121, Title = "first post", Comments = new List<Comment>() {new Comment() {Id = 2121}}});
+                ctx.Posts.Add(new Post
+                    {Id = 2121, Title = "second post", Author = new User() {Id = "1122", Name = "Bob"}});
+                ctx.Posts.Add(new Post
+                {
+                    Id = 21212121, Title = "third post", Text = "Test", Author = new User() {Id = "3333", Name = "Test"}
+                });
+                ctx.SaveChanges();
+            }
+
+            using (var ctx = new ForumContext(options))
+            {
+                var postService = new PostService(ctx);
+                var result = postService.GetCommentsCount(121);
+                Assert.AreEqual(1, result);
             }
         }
     }

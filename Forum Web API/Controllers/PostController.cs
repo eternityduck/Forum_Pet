@@ -76,7 +76,7 @@ namespace Forum_Web_API.Controllers
         [Authorize]
         public async Task<IActionResult> Edit(int id, string content)
         {
-            await _service.EditPostContent(id, content);
+            await _service.UpdateContentAsync(id, content);
             return Ok();
         }
         

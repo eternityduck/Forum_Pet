@@ -39,13 +39,7 @@ namespace BLL.Services
             await _context.Topics.AddAsync(model);
             await _context.SaveChangesAsync();
         }
-
-        public async Task UpdateAsync(Topic model)
-        { 
-            _context.Topics.Update(model);
-            await _context.SaveChangesAsync();
-        }
-
+        
         public async Task DeleteByIdAsync(int modelId)
         {
             _context.Topics.Remove(await GetByIdAsync(modelId));
@@ -56,12 +50,11 @@ namespace BLL.Services
         {
             var topic =await GetByIdAsync(id);
             topic.Title = title;
-            
             _context.Topics.Update(topic);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateTopicDescription(int id, string desc)
+        public async Task UpdateContentAsync(int id, string desc)
         {
             var topic =await GetByIdAsync(id);
             topic.Description = desc;

@@ -13,6 +13,35 @@ namespace Web_Api_Tests
     public class TopicServiceTests
     {
         [Test]
+        public async Task Create_Topic_Creates_New_Post_Via_Context()
+        {
+
+            var options = new DbContextOptionsBuilder<ForumContext>()
+                .UseInMemoryDatabase("Add_Topic_Adds_Topic_To_Database").Options;
+
+
+            await using (var ctx = new ForumContext(options))
+            {
+                var postService = new PostService(ctx);
+                var topicService = new TopicService(ctx, postService);
+
+                var topic = new Topic
+                {
+                    Title = "writing functional javascript",
+                    
+                };
+
+                await topicService.AddAsync(topic);
+            }
+
+
+            await using (var ctx = new ForumContext(options))
+            {
+                Assert.AreEqual(1, ctx.Topics.CountAsync().Result);
+                Assert.AreEqual("writing functional javascript", ctx.Topics.SingleAsync().Result.Title);
+            }
+        }
+        [Test]
         public void Filtered_Posts_Returns_Correct_Result_Count()
         {
             var options = new DbContextOptionsBuilder<ForumContext>()
@@ -100,7 +129,7 @@ namespace Web_Api_Tests
             {
                 var postService = new PostService(ctx);
                 var topicService = new TopicService(ctx, postService);
-                await topicService.UpdateTopicDescription(20, "newDesc");
+                await topicService.UpdateContentAsync(20, "newDesc");
                 await topicService.UpdateTopicTitle(20, "newtitle");
                 var topic = await topicService.GetByIdAsync(20);
                 Assert.AreEqual(topic.Description, "newDesc");

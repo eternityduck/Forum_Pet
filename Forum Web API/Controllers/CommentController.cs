@@ -95,7 +95,7 @@ namespace Forum_Web_API.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             var comment = await _commentService.GetByIdAsync(id);
             if (comment != null || user.Id != comment.Author.Id) return BadRequest("The comment is null or you are not the owner of comment");
-            await _commentService.UpdateAsync(id, message);
+            await _commentService.UpdateContentAsync(id, message);
             return Ok();
         }
     }

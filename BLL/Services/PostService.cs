@@ -28,17 +28,31 @@ namespace BLL.Services
             await _context.SaveChangesAsync();
         }
         
-        public async Task EditPostContent(int id, string content)
+        public async Task UpdateContentAsync(int id, string content)
         {
-            var post = await GetByIdAsync(id);
-            post.Text = content;
-            _context.Posts.Update(post);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var post = await GetByIdAsync(id);
+                post.Text = content;
+                _context.Posts.Update(post);
+                await _context.SaveChangesAsync();
+            }
+            catch (ForumException)
+            {
+                throw new ForumException("Invalid post id");
+            }
         }
 
         public int GetCommentsCount(int id)
         {
-            return GetById(id).Comments.Count;
+            try
+            {
+                return GetById(id).Comments.Count;
+            }
+            catch (ForumException)
+            {
+                throw new ForumException("Invalid id of post");
+            }
         }
 
         public IEnumerable<Post> GetPostsByUserId(int id)
@@ -102,25 +116,25 @@ namespace BLL.Services
         }
 
         
-
         public async Task AddAsync(Post model)
         {
             await _context.Posts.AddAsync(model);
             await _context.SaveChangesAsync();
         }
-
-        public async Task UpdateAsync(Post model)
-        {
-            _context.Entry(model).State = EntityState.Modified;
-            _context.Posts.Update(model);
-            await _context.SaveChangesAsync();
-        }
-
+        
         public async Task DeleteByIdAsync(int modelId)
         {
-            var model = await _context.Posts.Include(x => x.Comments).SingleOrDefaultAsync(x=>x.Id == modelId);
-            _context.Remove(model);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var model = await _context.Posts.Include(x => x.Comments).SingleOrDefaultAsync(x => x.Id == modelId);
+                _context.Remove(model);
+                await _context.SaveChangesAsync();
+            }
+            catch (ForumException)
+            {
+                throw new ForumException("Invalid id");
+            }
+            
         }
 
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)

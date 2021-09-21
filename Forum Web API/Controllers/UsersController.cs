@@ -55,7 +55,7 @@ namespace Forum_Web_API.Controllers
             }
             return user;
         }
-        //TODO FIX
+        
         [HttpPut("/Edit")]
         public async Task<ActionResult<EditUserViewModel>> Edit(EditUserViewModel model)
         {
@@ -70,7 +70,7 @@ namespace Forum_Web_API.Controllers
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index");
+                return Ok("Successfully edited user");
             }
 
             foreach (var error in result.Errors)
@@ -90,34 +90,9 @@ namespace Forum_Web_API.Controllers
                 await _userManager.DeleteAsync(user);
             }
         
-            return RedirectToAction("Index");
+            return Ok("Successfully deleted");
         }
         
-        [HttpPost("/ChangePassword")]
-        public async Task<ActionResult<ChangePasswordViewModel>> ChangePassword(ChangePasswordViewModel model)
-        {
-            if (!ModelState.IsValid) return model;
-            User user = await _userManager.FindByIdAsync(model.Id);
-            if (user != null)
-            {
-                IdentityResult result =
-                    await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
         
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "user not found");
-            }
-
-            return model;
-        }
     }
 }

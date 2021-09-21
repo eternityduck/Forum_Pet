@@ -131,6 +131,7 @@ namespace Forum_Web_API.Controllers
         // }
 
         [HttpPost("/Logout")]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -151,6 +152,33 @@ namespace Forum_Web_API.Controllers
                 Name = user.Name,
                 AccountCreatedAt = user.MemberSince,
             };
+            return model;
+        }
+        [HttpPut("/ChangePassword")]
+        [Authorize]
+        public async Task<ActionResult<ChangePasswordViewModel>> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid) return model;
+            User user = await _userManager.FindByIdAsync(model.Id);
+            if (user != null)
+            {
+                IdentityResult result =
+                    await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    return Ok("Successfully updated password");
+                }
+        
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "user not found");
+            }
+
             return model;
         }
     }
